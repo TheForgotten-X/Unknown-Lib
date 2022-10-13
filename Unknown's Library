@@ -1,3 +1,4 @@
+print("Test")
 local Lib = {}
 
 function Lib:Create(Name , Game , Key , DisableKey)
