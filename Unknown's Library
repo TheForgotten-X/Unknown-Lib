@@ -1,1 +1,1010 @@
+print("Executed")
+local Lib = {}
 
+function Lib:Create(Name , Game , Key , DisableKey)
+
+    local UIS = game:GetService("UserInputService")
+    local TWS = game:GetService("TweenService")
+    
+    local UnknownsUILibrary11v = Instance.new("ScreenGui")
+    local Mainframe = Instance.new("Frame")
+    local MainframeConstant = Instance.new("UIAspectRatioConstraint")
+    local SideMenu = Instance.new("Frame")
+    local SMDropShadow = Instance.new("Frame")
+    local SMDSConstant = Instance.new("UIAspectRatioConstraint")
+    local SideMenuButtons = Instance.new("ScrollingFrame")
+    local SMList = Instance.new("UIListLayout")
+    local SMBConstant = Instance.new("UIAspectRatioConstraint")
+    local TabHoldingFrame = Instance.new("Frame")
+    local LibNameFrame = Instance.new("Frame")
+    local UIName = Instance.new("TextLabel")
+    local UNConstant = Instance.new("UIAspectRatioConstraint")
+    local UNTextConstant = Instance.new("UITextSizeConstraint")
+    local LNFDropShadow = Instance.new("Frame")
+    local LNFDSConstant = Instance.new("UIAspectRatioConstraint")
+    local UIGameName = Instance.new("TextLabel")
+    local UGNConstant = Instance.new("UIAspectRatioConstraint")
+    local UGNTextConstant = Instance.new("UITextSizeConstraint")
+    local LNFConstant = Instance.new("UIAspectRatioConstraint")
+    local SMConstant = Instance.new("UIAspectRatioConstraint")
+    local THFConstant = Instance.new("UIAspectRatioConstraint")
+
+    local function DragScript()
+        local gui = Mainframe
+        local dragging
+        local dragInput
+        local dragStart
+        local startPos
+        local function update(input)
+            local delta = input.Position - dragStart
+            gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+        gui.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                dragging = true
+                dragStart = input.Position
+                startPos = gui.Position
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragging = false
+                    end
+                end)
+            end
+        end)
+        gui.InputChanged:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+                dragInput = input
+            end
+        end)
+        UIS.InputChanged:Connect(function(input)
+            if input == dragInput and dragging then
+                update(input)
+            end
+        end)
+    end
+    DragScript()
+
+    if not DisableKey then
+        UIS.InputBegan:Connect(function(Input , Chat)
+            if not Chat and Input.KeyCode.Name == Key then
+                if UnknownsUILibrary11v.Enabled then
+                    UnknownsUILibrary11v.Enabled = false
+                else
+                    UnknownsUILibrary11v.Enabled = true
+                end 
+            end
+        end)
+    end
+
+    if Name == "" then
+        Name = "Unknown's UI Library"
+    end
+    if Game == "" then
+        Game = "Template"
+    end
+
+    UnknownsUILibrary11v.Name = "Unknown's UI Library"
+    UnknownsUILibrary11v.Parent = game:GetService("CoreGui")
+    
+    Mainframe.Name = "Mainframe"
+    Mainframe.Parent = UnknownsUILibrary11v
+    Mainframe.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    Mainframe.BorderSizePixel = 0
+    Mainframe.Position = UDim2.new(0, 562, 0, 254)
+    Mainframe.Size = UDim2.new(0, 706, 0, 484)
+
+    MainframeConstant.Name = "Mainframe Constant"
+    MainframeConstant.Parent = Mainframe
+    MainframeConstant.AspectRatio = 1.459
+    
+    SideMenu.Name = "SideMenu"
+    SideMenu.Parent = Mainframe
+    SideMenu.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    SideMenu.BorderSizePixel = 0
+    SideMenu.Position = UDim2.new(0, 0, 0.132231399, 0)
+    SideMenu.Size = UDim2.new(0, 200, 0, 420)
+    SideMenu.ZIndex = 2
+    
+    SMDropShadow.Name = "SM DropShadow"
+    SMDropShadow.Parent = SideMenu
+    SMDropShadow.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+    SMDropShadow.BorderSizePixel = 0
+    SMDropShadow.Position = UDim2.new(0, 2, 0, 0)
+    SMDropShadow.Size = UDim2.new(1, 0, 1, 0)
+    
+    SMDSConstant.Name = "SMDS Constant"
+    SMDSConstant.Parent = SMDropShadow
+    SMDSConstant.AspectRatio = 0.476
+    
+    SideMenuButtons.Name = "SideMenu Buttons"
+    SideMenuButtons.Parent = SideMenu
+    SideMenuButtons.Active = true
+    SideMenuButtons.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    SideMenuButtons.BorderSizePixel = 0
+    SideMenuButtons.Position = UDim2.new(0.0500000007, 0, 0.0219999999, 0)
+    SideMenuButtons.Size = UDim2.new(0, 180, 0, 400)
+    SideMenuButtons.ZIndex = 3
+    SideMenuButtons.CanvasSize = UDim2.new(0, 0, 0, 0)
+    SideMenuButtons.ScrollBarThickness = 4
+    
+    SMList.Name = "SM List"
+    SMList.Parent = SideMenuButtons
+    SMList.SortOrder = Enum.SortOrder.LayoutOrder
+    SMList.Padding = UDim.new(0, 5)
+
+    SMBConstant.Name = "SMB Constant"
+    SMBConstant.Parent = SideMenuButtons
+    SMBConstant.AspectRatio = 0.450
+    
+    LibNameFrame.Name = "Lib Name Frame"
+    LibNameFrame.Parent = Mainframe
+    LibNameFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    LibNameFrame.BorderSizePixel = 0
+    LibNameFrame.Size = UDim2.new(0, 200, 0, 64)
+    LibNameFrame.ZIndex = 2
+    
+    UIName.Name = "UI Name"
+    UIName.Parent = LibNameFrame
+    UIName.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    UIName.BackgroundTransparency = 1.000
+    UIName.BorderSizePixel = 0
+    UIName.Position = UDim2.new(0, 10, 0, 6)
+    UIName.Size = UDim2.new(0, 180, 0, 20)
+    UIName.ZIndex = 3
+    UIName.Font = Enum.Font.Unknown
+    UIName.Text = Name
+    UIName.TextColor3 = Color3.fromRGB(255, 255, 255)
+    UIName.TextScaled = true
+    UIName.TextSize = 16.000
+    UIName.TextWrapped = true
+    UIName.TextXAlignment = Enum.TextXAlignment.Left
+    
+    UNConstant.Name = "UN Constant"
+    UNConstant.Parent = UIName
+    UNConstant.AspectRatio = 9.000
+    
+    UNTextConstant.Name = "UN Text Constant"
+    UNTextConstant.Parent = UIName
+    UNTextConstant.MaxTextSize = 12
+    
+    LNFDropShadow.Name = "LNF Drop Shadow"
+    LNFDropShadow.Parent = LibNameFrame
+    LNFDropShadow.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+    LNFDropShadow.BorderSizePixel = 0
+    LNFDropShadow.Position = UDim2.new(0, 2, 0, 0)
+    LNFDropShadow.Size = UDim2.new(1, 0, 1, 0)
+    
+    LNFDSConstant.Name = "LNFDS Constant"
+    LNFDSConstant.Parent = LNFDropShadow
+    LNFDSConstant.AspectRatio = 3.125
+    
+    UIGameName.Name = "UI Game Name"
+    UIGameName.Parent = LibNameFrame
+    UIGameName.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    UIGameName.BackgroundTransparency = 1.000
+    UIGameName.BorderSizePixel = 0
+    UIGameName.Position = UDim2.new(0, 10, 0, 25)
+    UIGameName.Size = UDim2.new(0, 180, 0, 20)
+    UIGameName.ZIndex = 3
+    UIGameName.Font = Enum.Font.Code
+    UIGameName.Text = Game
+    UIGameName.TextColor3 = Color3.fromRGB(255, 255, 255)
+    UIGameName.TextScaled = true
+    UIGameName.TextSize = 16.000
+    UIGameName.TextWrapped = true
+    UIGameName.TextXAlignment = Enum.TextXAlignment.Left
+    
+    UGNConstant.Name = "UGN Constant"
+    UGNConstant.Parent = UIGameName
+    UGNConstant.AspectRatio = 9.000
+    
+    UGNTextConstant.Name = "UGN Text Constant"
+    UGNTextConstant.Parent = UIGameName
+    UGNTextConstant.MaxTextSize = 20
+    
+    LNFConstant.Name = "LNF Constant"
+    LNFConstant.Parent = LibNameFrame
+    LNFConstant.AspectRatio = 3.125
+
+    TabHoldingFrame.Name = "TabHolding Frame"
+    TabHoldingFrame.Parent = Mainframe
+    TabHoldingFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    TabHoldingFrame.BorderSizePixel = 0
+    TabHoldingFrame.Position = UDim2.new(0.286118984, 0, 0, 0)
+    TabHoldingFrame.Size = UDim2.new(0, 504, 0, 484)
+    TabHoldingFrame.ZIndex = 2
+
+    SMConstant.Name = "SM Constant"
+    SMConstant.Parent = SideMenu
+    SMConstant.AspectRatio = 0.476
+
+    THFConstant.Name = "THF Constant"
+    THFConstant.Parent = TabHoldingFrame
+    THFConstant.AspectRatio = 1.041
+
+    local Tabs = {}
+
+    function Tabs:Tab(Name , Size)
+
+        local TemplateSideButton = Instance.new("TextButton")
+        local TSBCorner = Instance.new("UICorner")
+        local TSBImage = Instance.new("ImageLabel")
+        local TSBIConstant = Instance.new("UIAspectRatioConstraint")
+        local TSBText = Instance.new("TextLabel")
+        local TSBTConstant = Instance.new("UIAspectRatioConstraint")
+        local TSBTTextConstant = Instance.new("UITextSizeConstraint")
+        local Tab = Instance.new("ScrollingFrame")
+        local TabConstant = Instance.new("UIAspectRatioConstraint")
+        local TabList = Instance.new("UIListLayout")
+
+        if Name == "" then
+            Name = "Template"
+        end
+
+        TemplateSideButton.Name = "TemplateSideButton"
+        TemplateSideButton.Parent = SideMenuButtons
+        TemplateSideButton.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+        TemplateSideButton.BorderSizePixel = 0
+        TemplateSideButton.Size = UDim2.new(0, 170, 0, 40)
+        TemplateSideButton.ZIndex = 4
+        TemplateSideButton.Font = Enum.Font.Code
+        TemplateSideButton.Text = ""
+        TemplateSideButton.TextColor3 = Color3.fromRGB(210, 210, 210)
+        TemplateSideButton.TextSize = 14.000
+        TemplateSideButton.AutoButtonColor = false
+        TemplateSideButton.MouseButton1Click:Connect(function()
+            for i, x in ipairs(TabHoldingFrame:GetChildren()) do
+                if x.Name == "Tab" then
+                    x.Visible = false
+                end
+            end
+            Tab.Visible = true
+        end)
+        
+        TSBCorner.Name = "TSB Corner"
+        TSBCorner.Parent = TemplateSideButton
+        
+        TSBImage.Name = "TSB Image"
+        TSBImage.Parent = TemplateSideButton
+        TSBImage.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        TSBImage.BackgroundTransparency = 1.000
+        TSBImage.BorderSizePixel = 0
+        TSBImage.Position = UDim2.new(0, 5, 0, 5)
+        TSBImage.Size = UDim2.new(0, 30, 0, 30)
+        TSBImage.ZIndex = 5
+        TSBImage.Image = "rbxassetid://7129850222"
+        TSBImage.ImageTransparency = 0.4
+        
+        TSBIConstant.Name = "TSBI Constant"
+        TSBIConstant.Parent = TSBImage
+        
+        TSBText.Name = "TSB Text"
+        TSBText.Parent = TemplateSideButton
+        TSBText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TSBText.BackgroundTransparency = 1.000
+        TSBText.Position = UDim2.new(0, 41, 0, 5)
+        TSBText.Size = UDim2.new(0, 128, 0, 30)
+        TSBText.ZIndex = 5
+        TSBText.Font = Enum.Font.Unknown
+        TSBText.Text = Name
+        TSBText.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TSBText.TextScaled = true
+        TSBText.TextSize = 15.000
+        TSBText.TextWrapped = true
+        TSBText.TextXAlignment = Enum.TextXAlignment.Left
+        TSBText.TextTransparency = 0.4
+
+        TemplateSideButton.MouseEnter:Connect(function()
+            TWS:Create(TSBText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play()
+            TWS:Create(TSBImage, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{ImageTransparency = 0}):Play()
+        end)
+
+        TemplateSideButton.MouseLeave:Connect(function()
+            TWS:Create(TSBText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play()
+            TWS:Create(TSBImage, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{ImageTransparency = 0.4}):Play()
+        end)
+        
+        TSBTConstant.Name = "TSBT Constant"
+        TSBTConstant.Parent = TSBText
+        TSBTConstant.AspectRatio = 4.267
+        
+        TSBTTextConstant.Name = "TSBT Text Constant"
+        TSBTTextConstant.Parent = TSBText
+        TSBTTextConstant.MaxTextSize = 12
+        
+        Tab.Name = "Tab"
+        Tab.Parent = TabHoldingFrame
+        Tab.Active = true
+        Tab.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        Tab.BorderSizePixel = 0
+        Tab.Position = UDim2.new(0.0238095243, 0, 0.0247933883, 0)
+        Tab.Size = UDim2.new(0, 480, 0, 460)
+        Tab.ZIndex = 3
+        Tab.CanvasSize = UDim2.new(0, 0, Size, 0)
+        Tab.ScrollBarThickness = 4
+        Tab.Visible = false
+        
+        TabConstant.Name = "Tab Constant"
+        TabConstant.Parent = Tab
+        TabConstant.AspectRatio = 1.043
+
+        TabList.Name = "TabList"
+        TabList.Parent = Tab
+        TabList.SortOrder = Enum.SortOrder.LayoutOrder
+        TabList.Padding = UDim.new(0, 5)
+
+        local ButtonContainer = {}
+        function ButtonContainer:Button(Name , Callback)
+
+            local TabButton = Instance.new("TextButton")
+            local TBCorner = Instance.new("UICorner")
+            local TBText = Instance.new("TextLabel")
+            local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+            local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+            local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+
+            if Name == "" then
+                Name = "Template"
+            end
+
+            TabButton.Name = "Tab Button"
+            TabButton.Parent = Tab
+            TabButton.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+            TabButton.BorderSizePixel = 0
+            TabButton.Size = UDim2.new(0, 465, 0, 50)
+            TabButton.ZIndex = 4
+            TabButton.Font = Enum.Font.SourceSans
+            TabButton.Text = ""
+            TabButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+            TabButton.TextSize = 14.000
+            TabButton.AutoButtonColor = false
+            TabButton.MouseButton1Click:Connect(function()
+                pcall(Callback)
+            end)
+            
+            TBCorner.Name = "TB Corner"
+            TBCorner.Parent = TabButton
+            
+            TBText.Name = "TB Text"
+            TBText.Parent = TabButton
+            TBText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TBText.BackgroundTransparency = 1.000
+            TBText.Position = UDim2.new(0, 20, 0, 9)
+            TBText.Size = UDim2.new(0, 180, 0, 30)
+            TBText.ZIndex = 5
+            TBText.Font = Enum.Font.Unknown
+            TBText.Text = Name
+            TBText.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TBText.TextScaled = true
+            TBText.TextSize = 15.000
+            TBText.TextWrapped = true
+            TBText.TextXAlignment = Enum.TextXAlignment.Left
+            TBText.TextTransparency = 0.4
+
+            TabButton.MouseEnter:Connect(function()
+				TWS:Create(TBText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play()
+			end)
+
+			TabButton.MouseLeave:Connect(function()
+				TWS:Create(TBText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play()
+			end)
+            
+            UIAspectRatioConstraint.Parent = TBText
+            UIAspectRatioConstraint.AspectRatio = 6.000
+            
+            UITextSizeConstraint.Parent = TBText
+            UITextSizeConstraint.MaxTextSize = 13
+            
+            UIAspectRatioConstraint_2.Parent = TabButton
+            UIAspectRatioConstraint_2.AspectRatio = 9.300
+
+        end
+
+        function ButtonContainer:ToggleButton(Name , Callback)
+
+            local TabToggleButton = Instance.new("TextButton")
+            local TTBCorner = Instance.new("UICorner")
+            local TTBText = Instance.new("TextLabel")
+            local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
+            local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
+            local TTBImage = Instance.new("ImageLabel")
+            local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
+            local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
+            local Toggle = false
+
+            if Name == "" then
+                Name = "Template"
+            end
+
+            TabToggleButton.Name = "Tab Toggle Button"
+            TabToggleButton.Parent = Tab
+            TabToggleButton.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+            TabToggleButton.BorderSizePixel = 0
+            TabToggleButton.Size = UDim2.new(0, 465, 0, 50)
+            TabToggleButton.ZIndex = 4
+            TabToggleButton.Font = Enum.Font.SourceSans
+            TabToggleButton.Text = ""
+            TabToggleButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+            TabToggleButton.TextSize = 14.000
+            TabToggleButton.AutoButtonColor = false
+            TabToggleButton.MouseButton1Click:Connect(function()
+                if not Toggle then
+                    TTBImage.Image = "rbxassetid://7468883528"
+                else
+                    TTBImage.Image = "rbxassetid://7468899170"
+                end
+                Toggle = not Toggle
+                pcall(Callback , Toggle)
+            end)
+            
+            TTBCorner.Name = "TTB Corner"
+            TTBCorner.Parent = TabToggleButton
+            
+            TTBText.Name = "TTB Text"
+            TTBText.Parent = TabToggleButton
+            TTBText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TTBText.BackgroundTransparency = 1.000
+            TTBText.Position = UDim2.new(0, 20, 0, 9)
+            TTBText.Size = UDim2.new(0, 180, 0, 30)
+            TTBText.ZIndex = 5
+            TTBText.Font = Enum.Font.Unknown
+            TTBText.Text = Name
+            TTBText.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TTBText.TextScaled = true
+            TTBText.TextSize = 15.000
+            TTBText.TextWrapped = true
+            TTBText.TextXAlignment = Enum.TextXAlignment.Left
+            TTBText.TextTransparency = 0.4
+            
+            UIAspectRatioConstraint_3.Parent = TTBText
+            UIAspectRatioConstraint_3.AspectRatio = 6.000
+            
+            UITextSizeConstraint_2.Parent = TTBText
+            UITextSizeConstraint_2.MaxTextSize = 13
+            
+            TTBImage.Name = "TTB Image"
+            TTBImage.Parent = TabToggleButton
+            TTBImage.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            TTBImage.BackgroundTransparency = 1.000
+            TTBImage.BorderSizePixel = 0
+            TTBImage.Position = UDim2.new(0, 409, 0, 5)
+            TTBImage.Size = UDim2.new(0, 40, 0, 40)
+            TTBImage.ZIndex = 5
+            TTBImage.Image = "rbxassetid://7468899170"
+            TTBImage.ImageTransparency = 0.4
+
+            TabToggleButton.MouseEnter:Connect(function()
+                TWS:Create(TTBText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play()
+                TWS:Create(TTBImage, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{ImageTransparency = 0}):Play()
+            end)
+    
+            TabToggleButton.MouseLeave:Connect(function()
+                TWS:Create(TTBText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play()
+                TWS:Create(TTBImage, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{ImageTransparency = 0.4}):Play()
+            end)
+            
+            UIAspectRatioConstraint_4.Parent = TTBImage
+            
+            UIAspectRatioConstraint_5.Parent = TabToggleButton
+            UIAspectRatioConstraint_5.AspectRatio = 9.300
+        end
+
+        function ButtonContainer:Dropdown(Name , Buttons , Size , Callback)
+
+            local TabDropdownButton = Instance.new("TextButton")
+            local TDDBCorner = Instance.new("UICorner")
+            local TDDBText = Instance.new("TextLabel")
+            local TDDBMainframe = Instance.new("ScrollingFrame")
+            local UIListLayout = Instance.new("UIListLayout")
+            local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
+            local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
+            local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
+            local TDDBImage = Instance.new("ImageLabel")
+            local UIAspectRatioConstraint_10 = Instance.new("UIAspectRatioConstraint")
+            local DropdownToggled = false
+            local SelectedItem = ""
+
+            TabDropdownButton.Name = "Tab Dropdown Button"
+            TabDropdownButton.Parent = Tab
+            TabDropdownButton.Active = false
+            TabDropdownButton.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+            TabDropdownButton.BorderSizePixel = 0
+            TabDropdownButton.ClipsDescendants = true
+            TabDropdownButton.Position = UDim2.new(0, 0, 0.239130437, 0)
+            TabDropdownButton.Size = UDim2.new(0, 465, 0, 50)
+            TabDropdownButton.ZIndex = 4
+            TabDropdownButton.AutoButtonColor = true
+            TabDropdownButton.Font = Enum.Font.SourceSans
+            TabDropdownButton.Text = ""
+            TabDropdownButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+            TabDropdownButton.TextSize = 14.000
+            TabDropdownButton.AutoButtonColor = false
+            TabDropdownButton.MouseButton1Click:Connect(function()
+                if not DropdownToggled then
+                    TabDropdownButton:TweenSize(UDim2.new(0, 465, 0, 200), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
+                    TWS:Create(TDDBImage, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Rotation = 180}):Play()
+                else
+                    TabDropdownButton:TweenSize(UDim2.new(0, 465, 0, 50), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
+                    TWS:Create(TDDBImage, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Rotation = 0}):Play()
+                end
+                DropdownToggled = not DropdownToggled
+            end)
+
+            if Name == "" then
+                Name = "Template"
+            end
+            
+            TDDBCorner.Name = "TDDB Corner"
+            TDDBCorner.Parent = TabDropdownButton
+            
+            TDDBText.Name = "TDDB Text"
+            TDDBText.Parent = TabDropdownButton
+            TDDBText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TDDBText.BackgroundTransparency = 1.000
+            TDDBText.BorderSizePixel = 0
+            TDDBText.Position = UDim2.new(0, 20, 0, 9)
+            TDDBText.Size = UDim2.new(0, 180, 0, 30)
+            TDDBText.ZIndex = 5
+            TDDBText.Font = Enum.Font.Unknown
+            TDDBText.Text = Name .. " [ " .. "Selected" .. " ]"
+            TDDBText.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TDDBText.TextScaled = true
+            TDDBText.TextSize = 15.000
+            TDDBText.TextWrapped = true
+            TDDBText.TextXAlignment = Enum.TextXAlignment.Left
+            TDDBText.TextTransparency = 0.4
+            
+            TDDBMainframe.Name = "TDDB Mainframe"
+            TDDBMainframe.Parent = TDDBText
+            TDDBMainframe.Active = true
+            TDDBMainframe.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+            TDDBMainframe.BorderSizePixel = 0
+            TDDBMainframe.Position = UDim2.new(-0.111111112, 0, 1.50362349, 0)
+            TDDBMainframe.Size = UDim2.new(0, 465, 0, 140)
+            TDDBMainframe.ZIndex = 6
+            TDDBMainframe.CanvasSize = UDim2.new(0, 0, Size, 0)
+            TDDBMainframe.ScrollBarThickness = 4
+            for i, x in ipairs(Buttons) do
+                if x == "" then
+                    x = "Template"
+                end
+
+                local TDDBButton = Instance.new("TextButton")
+                local TDDBBCorner = Instance.new("UICorner")
+                local TDDBBText = Instance.new("TextLabel")
+                local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
+                local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
+                local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
+
+                TDDBButton.Name = "TDDB Button"
+                TDDBButton.Parent = TDDBMainframe
+                TDDBButton.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+                TDDBButton.BorderSizePixel = 0
+                TDDBButton.ClipsDescendants = true
+                TDDBButton.Position = UDim2.new(0, 0, 0.0461538471, 0)
+                TDDBButton.Size = UDim2.new(0, 465, 0, 50)
+                TDDBButton.ZIndex = 7
+                TDDBButton.Font = Enum.Font.SourceSans
+                TDDBButton.Text = ""
+                TDDBButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+                TDDBButton.TextSize = 14.000
+                TDDBButton.AutoButtonColor = false
+                TDDBButton.MouseButton1Click:Connect(function()
+                    pcall(Callback , x)
+                    SelectedItem = x
+                    TDDBText.Text = Name .. " [ " .. SelectedItem .. " ]"
+                end)
+                
+                TDDBBCorner.Name = "TDDBB Corner"
+                TDDBBCorner.Parent = TDDBButton
+                
+                TDDBBText.Name = "TDDBB Text"
+                TDDBBText.Parent = TDDBButton
+                TDDBBText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                TDDBBText.BackgroundTransparency = 1.000
+                TDDBBText.ClipsDescendants = true
+                TDDBBText.Position = UDim2.new(0, 20, 0, 9)
+                TDDBBText.Size = UDim2.new(0, 180, 0, 30)
+                TDDBBText.ZIndex = 8
+                TDDBBText.Font = Enum.Font.Unknown
+                TDDBBText.Text = x
+                TDDBBText.TextColor3 = Color3.fromRGB(255, 255, 255)
+                TDDBBText.TextScaled = true
+                TDDBBText.TextSize = 13.000
+                TDDBBText.TextWrapped = true
+                TDDBBText.TextXAlignment = Enum.TextXAlignment.Left
+                TDDBBText.TextTransparency = 0.4
+
+                TDDBButton.MouseEnter:Connect(function()
+                    TWS:Create(TDDBBText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play()
+                end)
+        
+                TDDBButton.MouseLeave:Connect(function()
+                    TWS:Create(TDDBBText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play()
+                end)    
+                
+                UIAspectRatioConstraint_6.Parent = TDDBBText
+                UIAspectRatioConstraint_6.AspectRatio = 6.000
+                
+                UITextSizeConstraint_3.Parent = TDDBBText
+                UITextSizeConstraint_3.MaxTextSize = 13
+                
+                UIAspectRatioConstraint_7.Parent = TDDBButton
+                UIAspectRatioConstraint_7.AspectRatio = 9.300
+            end
+            
+            UIListLayout.Parent = TDDBMainframe
+            UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+            
+            UIAspectRatioConstraint_8.Parent = TDDBMainframe
+            UIAspectRatioConstraint_8.AspectRatio = 3.321
+            
+            UIAspectRatioConstraint_9.Parent = TDDBText
+            UIAspectRatioConstraint_9.AspectRatio = 6.000
+            
+            UITextSizeConstraint_4.Parent = TDDBText
+            UITextSizeConstraint_4.MaxTextSize = 13
+            
+            TDDBImage.Name = "TDDB Image"
+            TDDBImage.Parent = TabDropdownButton
+            TDDBImage.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            TDDBImage.BackgroundTransparency = 1.000
+            TDDBImage.BorderSizePixel = 0
+            TDDBImage.Position = UDim2.new(0, 417, 0, 8)
+            TDDBImage.Size = UDim2.new(0, 32, 0, 32)
+            TDDBImage.ZIndex = 5
+            TDDBImage.Image = "rbxassetid://878102417"
+            TDDBImage.ImageTransparency = 0.4
+
+            TabDropdownButton.MouseEnter:Connect(function()
+                TWS:Create(TDDBText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play()
+                TWS:Create(TDDBImage, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{ImageTransparency = 0}):Play()
+            end)
+    
+            TabDropdownButton.MouseLeave:Connect(function()
+                TWS:Create(TDDBText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play()
+                TWS:Create(TDDBImage, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{ImageTransparency = 0.4}):Play()
+            end)
+            
+            UIAspectRatioConstraint_10.Parent = TDDBImage
+        end
+
+        function ButtonContainer:Slider(Name , Min , Max , Callback)
+
+            local TabSliderMainFrame = Instance.new("Frame")
+            local SliderFrame = Instance.new("Frame")
+            local SliderButton = Instance.new("TextButton")
+            local InnerSlider = Instance.new("Frame")
+            local ISCorner = Instance.new("UICorner")
+            local SliderAmmount = Instance.new("TextLabel")
+            local SAConstant = Instance.new("UIAspectRatioConstraint")
+            local SATextConstant = Instance.new("UITextSizeConstraint")
+            local SBCorner = Instance.new("UICorner")
+            local SBConstant = Instance.new("UIAspectRatioConstraint")
+            local SFCorner = Instance.new("UICorner")
+            local SFConstant = Instance.new("UIAspectRatioConstraint")
+            local TBText_2 = Instance.new("TextLabel")
+            local TBTConstant = Instance.new("UIAspectRatioConstraint")
+            local TBTTextConstant = Instance.new("UITextSizeConstraint")
+            local SMFCorner = Instance.new("UICorner")
+            local SMFConstant = Instance.new("UIAspectRatioConstraint")
+
+            if Name == "" then
+                Name = "Template"
+            end
+
+            TabSliderMainFrame.Name = "Tab Slider MainFrame"
+            TabSliderMainFrame.Parent = Tab
+            TabSliderMainFrame.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+            TabSliderMainFrame.BorderSizePixel = 0
+            TabSliderMainFrame.Position = UDim2.new(0, 0, 0, 165)
+            TabSliderMainFrame.Size = UDim2.new(0, 465, 0, 162)
+            TabSliderMainFrame.ZIndex = 3
+            
+            SliderFrame.Name = "Slider Frame"
+            SliderFrame.Parent = TabSliderMainFrame
+            SliderFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+            SliderFrame.BorderSizePixel = 0
+            SliderFrame.Position = UDim2.new(0, 188, 0, 14)
+            SliderFrame.Size = UDim2.new(0, 260, 0, 20)
+            SliderFrame.ZIndex = 4
+            
+            SliderButton.Name = "SliderButton"
+            SliderButton.Parent = SliderFrame
+            SliderButton.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+            SliderButton.BorderSizePixel = 0
+            SliderButton.Size = UDim2.new(0, 260, 0, 20)
+            SliderButton.ZIndex = 6
+            SliderButton.AutoButtonColor = false
+            SliderButton.Font = Enum.Font.Code
+            SliderButton.Text = ""
+            SliderButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+            SliderButton.TextSize = 14.000
+            
+            InnerSlider.Name = "Inner Slider"
+            InnerSlider.Parent = SliderButton
+            InnerSlider.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+            InnerSlider.BorderSizePixel = 0
+            InnerSlider.Position = UDim2.new(-0.000461519696, 0, 0, 0)
+            InnerSlider.Size = UDim2.new(0, 0, 0, 20)
+            InnerSlider.ZIndex = 7
+            
+            ISCorner.Name = "IS Corner"
+            ISCorner.Parent = InnerSlider
+            
+            SliderAmmount.Name = "SliderAmmount"
+            SliderAmmount.Parent = SliderButton
+            SliderAmmount.BackgroundColor3 = Color3.fromRGB(88, 94, 103)
+            SliderAmmount.BackgroundTransparency = 1.000
+            SliderAmmount.BorderSizePixel = 0
+            SliderAmmount.Position = UDim2.new(0, 68, 0, 0)
+            SliderAmmount.Size = UDim2.new(0, 120, 0, 20)
+            SliderAmmount.ZIndex = 8
+            SliderAmmount.Font = Enum.Font.Unknown
+            SliderAmmount.Text = Min
+            SliderAmmount.TextColor3 = Color3.fromRGB(255, 255, 255)
+            SliderAmmount.TextScaled = true
+            SliderAmmount.TextSize = 15.000
+            SliderAmmount.TextWrapped = true
+            SliderAmmount.TextTransparency = 0.4
+
+            SAConstant.Name = "SA Constant"
+            SAConstant.Parent = SliderAmmount
+            SAConstant.AspectRatio = 6.000
+            
+            SATextConstant.Name = "SA Text Constant"
+            SATextConstant.Parent = SliderAmmount
+            SATextConstant.MaxTextSize = 12
+            
+            SBCorner.Name = "SB Corner"
+            SBCorner.Parent = SliderButton
+            
+            SBConstant.Name = "SB Constant"
+            SBConstant.Parent = SliderButton
+            SBConstant.AspectRatio = 13.000
+            
+            SFCorner.CornerRadius = UDim.new(0, 12)
+            SFCorner.Name = "SF Corner"
+            SFCorner.Parent = SliderFrame
+            
+            SFConstant.Name = "SF Constant"
+            SFConstant.Parent = SliderFrame
+            SFConstant.AspectRatio = 13.000
+            
+            TBText_2.Name = "TB Text"
+            TBText_2.Parent = TabSliderMainFrame
+            TBText_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TBText_2.BackgroundTransparency = 1.000
+            TBText_2.Position = UDim2.new(0, 20, 0, 10)
+            TBText_2.Size = UDim2.new(0, 180, 0, 30)
+            TBText_2.ZIndex = 5
+            TBText_2.Font = Enum.Font.Unknown
+            TBText_2.Text = Name
+            TBText_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TBText_2.TextScaled = true
+            TBText_2.TextSize = 15.000
+            TBText_2.TextWrapped = true
+            TBText_2.TextXAlignment = Enum.TextXAlignment.Left
+            TBText_2.TextTransparency = 0.4
+
+            TabSliderMainFrame.MouseEnter:Connect(function()
+                TWS:Create(TBText_2, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play()
+                TWS:Create(SliderAmmount, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play()
+            end)
+    
+            TabSliderMainFrame.MouseLeave:Connect(function()
+                TWS:Create(TBText_2, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play()
+                TWS:Create(SliderAmmount, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play()
+            end)
+            
+            TBTConstant.Name = "TBT Constant"
+            TBTConstant.Parent = TBText_2
+            TBTConstant.AspectRatio = 6.000
+            
+            TBTTextConstant.Name = "TBT Text Constant"
+            TBTTextConstant.Parent = TBText_2
+            TBTTextConstant.MaxTextSize = 13
+            
+            SMFCorner.Name = "SMF Corner"
+            SMFCorner.Parent = TabSliderMainFrame
+            
+            SMFConstant.Name = "SMF Constant"
+            SMFConstant.Parent = TabSliderMainFrame
+            SMFConstant.AspectRatio = 9.300
+
+            local mouse = game.Players.LocalPlayer:GetMouse()
+            local Value;
+
+            SliderButton.MouseButton1Down:Connect(function()
+                Value = math.floor((((tonumber(Max) - tonumber(Min)) / 260) * InnerSlider.AbsoluteSize.X) + tonumber(Min)) or 0
+                InnerSlider.Size = UDim2.new(0, math.clamp(mouse.X - InnerSlider.AbsolutePosition.X, 0, 260), 0, 20)
+                local Move = mouse.Move:Connect(function()
+                    SliderAmmount.Text = Value
+                    Value = math.floor((((tonumber(Max) - tonumber(Min)) / 260) * InnerSlider.AbsoluteSize.X) + tonumber(Min))
+                    InnerSlider.Size = UDim2.new(0, math.clamp(mouse.X - InnerSlider.AbsolutePosition.X, 0, 260), 0, 20)
+                    pcall(Callback , Value)
+                end)
+                local Release = UIS.InputEnded:Connect(function(Mouse)
+                    if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+                        Value = math.floor((((tonumber(Max) - tonumber(Min)) / 260) * InnerSlider.AbsoluteSize.X) + tonumber(Min))
+                        InnerSlider.Size = UDim2.new(0, math.clamp(mouse.X - InnerSlider.AbsolutePosition.X, 0, 260), 0, 20)
+                        pcall(Callback , Value)
+                    end
+                end)
+                UIS.InputEnded:Connect(function(Input)
+                    if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+                        Value = math.floor((((tonumber(Max) - tonumber(Min)) / 260) * InnerSlider.AbsoluteSize.X) + tonumber(Min))
+                        pcall(Callback , Value)
+                        Move:Disconnect()
+                        Release:Disconnect()
+                    end
+                end)
+            end)
+
+        end
+
+        function ButtonContainer:InputBox(Name , Disappear , Callback)
+
+            local TabInput = Instance.new("Frame")
+            local TIText = Instance.new("TextLabel")
+            local TITConstant = Instance.new("UIAspectRatioConstraint")
+            local TITTextConstant = Instance.new("UITextSizeConstraint")
+            local TICorner = Instance.new("UICorner")
+            local TIConstant = Instance.new("UIAspectRatioConstraint")
+            local TIInputBox = Instance.new("TextBox")
+            local TIIBCorner = Instance.new("UICorner")
+            local TIIBConstrant = Instance.new("UIAspectRatioConstraint")
+            local TIIBTextConstant = Instance.new("UITextSizeConstraint")
+
+            if Name == "" then
+                Name = "Template"
+            end
+
+            TabInput.Name = "Tab Input"
+            TabInput.Parent = Tab
+            TabInput.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+            TabInput.BorderSizePixel = 0
+            TabInput.Position = UDim2.new(0, 0, 0, 165)
+            TabInput.Size = UDim2.new(0, 465, 0, 162)
+            TabInput.ZIndex = 3
+            
+            TIText.Name = "TI Text"
+            TIText.Parent = TabInput
+            TIText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TIText.BackgroundTransparency = 1.000
+            TIText.Position = UDim2.new(0, 20, 0, 10)
+            TIText.Size = UDim2.new(0, 180, 0, 30)
+            TIText.ZIndex = 5
+            TIText.Font = Enum.Font.Unknown
+            TIText.Text = Name
+            TIText.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TIText.TextScaled = true
+            TIText.TextSize = 15.000
+            TIText.TextWrapped = true
+            TIText.TextXAlignment = Enum.TextXAlignment.Left
+            TIText.TextTransparency = 0.4
+            
+            TITConstant.Name = "TIT Constant"
+            TITConstant.Parent = TIText
+            TITConstant.AspectRatio = 6.000
+            
+            TITTextConstant.Name = "TIT Text Constant"
+            TITTextConstant.Parent = TIText
+            TITTextConstant.MaxTextSize = 13
+            
+            TICorner.Name = "TI Corner"
+            TICorner.Parent = TabInput
+            
+            TIConstant.Name = "TI Constant"
+            TIConstant.Parent = TabInput
+            TIConstant.AspectRatio = 9.300
+            
+            TIInputBox.Name = "TI Input Box"
+            TIInputBox.Parent = TabInput
+            TIInputBox.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+            TIInputBox.BorderSizePixel = 0
+            TIInputBox.Position = UDim2.new(0.404301077, 0, 0.300000012, 0)
+            TIInputBox.Size = UDim2.new(0, 260, 0, 20)
+            TIInputBox.ZIndex = 5
+            TIInputBox.Font = Enum.Font.Unknown
+            TIInputBox.Text = ""
+            TIInputBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TIInputBox.TextScaled = true
+            TIInputBox.TextSize = 14.000
+            TIInputBox.TextWrapped = true
+            
+            TIIBCorner.Name = "TIIB Corner"
+            TIIBCorner.Parent = TIInputBox
+            
+            TIIBConstrant.Name = "TIIB Constrant"
+            TIIBConstrant.Parent = TIInputBox
+            TIIBConstrant.AspectRatio = 13.000
+            
+            TIIBTextConstant.Name = "TIIB Text Constant"
+            TIIBTextConstant.Parent = TIInputBox
+            TIIBTextConstant.MaxTextSize = 12
+
+            TabInput.MouseEnter:Connect(function()
+                TWS:Create(TIText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play()
+                TWS:Create(TIInputBox, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play()
+            end)
+    
+            TabInput.MouseLeave:Connect(function()
+                TWS:Create(TIText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play()
+                TWS:Create(TIInputBox, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play()
+            end)
+
+            TIInputBox.FocusLost:Connect(function()
+                pcall(Callback, TIInputBox.Text)
+                if Disappear then
+                    TIInputBox.Text = ""
+                end
+			end)
+
+        end
+
+        function ButtonContainer:TextLabel(Text)
+            local TabTextLabel = Instance.new("Frame")
+            local TTLText = Instance.new("TextLabel")
+            local TTLTConstant = Instance.new("UIAspectRatioConstraint")
+            local TTLTTextConstant = Instance.new("UITextSizeConstraint")
+            local TTLTextConstant = Instance.new("UICorner")
+            local TTLConstant = Instance.new("UIAspectRatioConstraint")
+
+            TabTextLabel.Name = "Tab TextLabel"
+            TabTextLabel.Parent = Tab
+            TabTextLabel.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+            TabTextLabel.BorderSizePixel = 0
+            TabTextLabel.Position = UDim2.new(0, 0, 0, 165)
+            TabTextLabel.Size = UDim2.new(0, 465, 0, 162)
+            TabTextLabel.ZIndex = 3
+            
+            TTLText.Name = "TTL Text"
+            TTLText.Parent = TabTextLabel
+            TTLText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TTLText.BackgroundTransparency = 1.000
+            TTLText.Position = UDim2.new(0, 21, 0, 5)
+            TTLText.Size = UDim2.new(0, 428, 0, 40)
+            TTLText.ZIndex = 5
+            TTLText.Font = Enum.Font.Unknown
+            TTLText.Text = Text
+            TTLText.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TTLText.TextScaled = true
+            TTLText.TextSize = 15.000
+            TTLText.TextWrapped = true
+            TTLText.TextXAlignment = Enum.TextXAlignment.Left
+            TTLText.TextTransparency = 0.4
+            
+            TTLTConstant.Name = "TTLT Constant"
+            TTLTConstant.Parent = TTLText
+            TTLTConstant.AspectRatio = 10.700
+            
+            TTLTTextConstant.Name = "TTLT Text Constant"
+            TTLTTextConstant.Parent = TTLText
+            TTLTTextConstant.MaxTextSize = 13
+            
+            TTLTextConstant.Name = "TTL Text Constant"
+            TTLTextConstant.Parent = TabTextLabel
+            
+            TTLConstant.Name = "TTL Constant"
+            TTLConstant.Parent = TabTextLabel
+            TTLConstant.AspectRatio = 9.300
+
+            TabTextLabel.MouseEnter:Connect(function()
+                TWS:Create(TTLText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play()
+            end)
+    
+            TabTextLabel.MouseLeave:Connect(function()
+                TWS:Create(TTLText, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play()
+            end)
+        end
+
+        return ButtonContainer
+
+    end
+
+    return Tabs
+
+end
+
+return Lib
